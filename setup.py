@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 
 setup(
-    name='Brain-Computer-Interface',
+    name='sphere',
     version='0.1.0',
     author='Noam Ezekiel',
     description='A Brain Computer Interface system',
