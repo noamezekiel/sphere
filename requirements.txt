@@ -8,8 +8,6 @@ coverage==5.0.4
 cycler==0.10.0
 Flask==1.1.2
 furl==2.1.0
-grpcio==1.28.1
-grpcio-tools==1.28.1
 idna==2.9
 itsdangerous==1.1.0
 Jinja2==2.11.1
@@ -25,6 +23,7 @@ Pillow==7.1.2
 pluggy==0.13.1
 protobuf==3.11.3
 py==1.8.1
+pymongo==3.10.1
 pyparsing==2.4.7
 pytest==5.4.1
 pytest-cov==2.8.1
