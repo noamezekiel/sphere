@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2> Sphere </h2>
+    <p> Welcome to Sphere, here is our users: </p>
+    <table class="table table-hover">
+        <thed>
+            <tr>
+                <th>User id</th>
+                <th> User name</th>
+            </tr>
+        </thed>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <th> 
+                    <a class="btn btn-danger btn-sm" href="/{{ user['user_id'] }}" role="button">
+                        {{ user['user_id'] }}
+                    </a>
+                </th>
+                <th>{{user['username']}}</th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

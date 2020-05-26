@@ -1,0 +1,47 @@
+body {
+    font: georgia, sans-serif;
+    line-height: 1.88889;
+    background-color: #fffdd0;
+    padding-top: 20px;
+    padding-bottom: 70px;
+}
+h2 {
+    font: italic bold georgia, sans-serif;;
+}
+h3 { 
+    font: italic bold 1.4em georgia, sans-serif;
+    letter-spacing: 1px; 
+    margin-bottom: 0; 
+    color: #7D775C;
+}
+p {
+    font: italic normal 1em georgia, sans-serif;
+    letter-spacing: 1px; 
+    margin-bottom: 0; 
+    color: #7D775C;
+}
+a:link { 
+    font-weight: bold; 
+    text-decoration: none; 
+    color: #B7A5DF;
+}
+a:visited { 
+    font-weight: bold; 
+    text-decoration: none; 
+    color: #D4CDDC;
+}
+a:hover, a:focus, a:active { 
+    text-decoration: underline; 
+    color: #9685BA;
+}
+
+.result {
+    background: lightgrey;
+}
+
+.row {
+    padding: 10px;
+}
+.navigation {
+    background: grey;
+}

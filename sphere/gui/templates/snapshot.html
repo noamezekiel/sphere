@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center"> Snapshot {{snapshot['datetime'].strftime('%a %b %y %H:%M:%S')}} of {{user['username']}} </h2>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1 result">
+            {% if 'pose' in snapshot %}
+            <h3> Pose </h3>
+            <p>
+                Translation: 
+                x={{snapshot['pose']['translation'][0]}}, y={{snapshot['pose']['translation'][1]}}, z={{snapshot['pose']['translation'][2]}}
+            </p>
+            <p>
+                Rotaion: 
+                x={{snapshot['pose']['rotation'][0]}}, y={{snapshot['pose']['rotation'][1]}}, z={{snapshot['pose']['rotation'][2]}}, w={{snapshot['pose']['rotation'][3]}}
+            </p>
+            {% endif %}
+        </div>
+        <div class="col-md-4 col-md-offset-1 result">
+            {% if 'feelings' in snapshot %}
+            <style>
+                .feelings {
+                    width: 100%;
+                    background-color: #ddd;
+                }
+                .bar {
+                    text-align: right;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    color: white;
+                }
+                .hunger {width: {{(snapshot['feelings'][0] + 1) * 50}}%; background-color: #4CAF50;}
+                .thirst {width: {{(snapshot['feelings'][1] + 1) * 50}}%; background-color: #2196F3;}
+                .exhaustion {width: {{(snapshot['feelings'][2] + 1) * 50}}%; background-color: #f44336;}
+                .happiness {width: {{(snapshot['feelings'][3] + 1) * 50}}%; background-color: #808080;}
+            </style>
+            <h3> Feelings </h3>
+            <p> hunger </p>
+            <div class="feelings">
+                <div class="bar hunger"></div>
+            </div>
+            <p> thirst </p>
+            <div class="feelings">
+                <div class="bar thirst"></div>
+            </div>
+            <p> exhaustion </p>
+            <div class="feelings">
+                <div class="bar exhaustion"></div>
+            </div>
+            <p> happiness </p>
+            <div class="feelings">
+                <div class="bar happiness"></div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1 result">
+            {% if 'color_image' in snapshot %}
+            <h3> Color Image </h3>
+                <img src="{{ url_for('download_file', path=snapshot['color_image']) }}" class="img-responsive" alt="color-image">
+            {% endif %}
+        </div>
+        <div class="col-md-4 col-md-offset-1 result">
+            {% if 'depth_image' in snapshot %}
+            <h3> Depth Image </h3>
+                <img src="{{ url_for('download_file', path=snapshot['depth_image']) }}" class="img-responsive" alt="depth-image">
+            {% endif %}
+        </div>
+    </div>
+    <nav class="navbar navbar-default navbar-fixed-bottom navigation">
+        <div class="container">
+            <a class="btn btn-primary btn-sm" href="/" role="button">
+                back home
+            </a>
+            <a class="btn btn-danger btn-sm" href="/{{ user['user_id'] }}" role="button">
+                back to user
+            </a>
+        </div>
+    </nav>
+</div>
+
+{% endblock content %}
