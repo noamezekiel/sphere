@@ -1,2 +1,4 @@
-from .connection import Connection
-from .listener import Listener
+import tempfile
+from .load import load_drivers, load_parsers
+
+DIRECTORY = tempfile.mkdtemp()
