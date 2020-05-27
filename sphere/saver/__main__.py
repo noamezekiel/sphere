@@ -10,7 +10,7 @@ def main():
     pass
 
 @main.command('save')
-@click.option('-d', '--database', default='mongodb://127.0.0.1:27017/', type=str)
+@click.option('-d', '--database', default='mongodb://0.0.0.0:27017/', type=str)
 @click.argument('topic', type=str)
 @click.argument('path', type=str)
 def sphere_save(database, topic, path):
@@ -20,8 +20,8 @@ def sphere_save(database, topic, path):
     saver.save(topic, raw_data)
 
 @main.command('run-saver')
-@click.argument('db_url', default='mongodb://127.0.0.1:27017/', type=str)
-@click.argument('mq_url', default='rabbitmq://127.0.0.1:5672/', type=str)
+@click.argument('db_url', default='mongodb://0.0.0.0:27017/', type=str)
+@click.argument('mq_url', default='rabbitmq://0.0.0.0:5672/', type=str)
 def sphere_run_saver(db_url, mq_url):
     saver = Saver(db_url)
     f = furl(mq_url)

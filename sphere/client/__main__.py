@@ -7,7 +7,7 @@ def main():
 
 
 @main.command('upload-sample')
-@click.option('-h', '--host', default='127.0.0.1', type=str)
+@click.option('-h', '--host', default='0.0.0.0', type=str)
 @click.option('-p', '--port', default=8000, type=int)
 @click.argument('path', default='etc/sample.mind.gz')
 @click.argument('file_format', default='protobuf')

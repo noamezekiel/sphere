@@ -78,7 +78,7 @@ def get_result_data(user_id, snapshot_id, result):
 
 
 
-def run_api_server(host='127.0.0.1', port=5000, database_url='mongodb://127.0.0.1:27017/'):
+def run_api_server(host='0.0.0.0', port=5000, database_url='mongodb://0.0.0.0:27017/'):
     f = furl(database_url)
     db, db_host, db_port = f.scheme, f.host, f.port 
     app._db_driver = db_drivers[db].Driver(db_host, db_port)

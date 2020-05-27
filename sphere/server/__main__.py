@@ -9,9 +9,9 @@ def main():
     pass
 
 @main.command('run-server')
-@click.option('-h', '--host', default='127.0.0.1', type=str)
+@click.option('-h', '--host', default='0.0.0.0', type=str)
 @click.option('-p', '--port', default=8000, type=int)
-@click.argument('url', default='rabbitmq://127.0.0.1:5672/', type=str)
+@click.argument('url', default='rabbitmq://0.0.0.0:5672/', type=str)
 def sphere_run_server(host, port, url):
     f = furl(url)
     mq, mq_host, mq_port = f.scheme, f.host, f.port

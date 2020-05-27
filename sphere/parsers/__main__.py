@@ -20,7 +20,7 @@ def sphere_parse(parser_name, path):
 
 @main.command('run-parser')
 @click.argument('parser_name', type=str)
-@click.argument('url',default='rabbitmq://127.0.0.1:5672/' ,type=str)
+@click.argument('url',default='rabbitmq://0.0.0.0:5672/' ,type=str)
 def sphere_run_parser(parser_name, url):
     f = furl(url)
     mq, mq_host, mq_port = f.scheme, f.host, f.port
