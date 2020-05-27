@@ -1,0 +1,138 @@
+version: "3"
+
+services:
+
+    rabbitmq:
+        image: rabbitmq:management
+        ports:
+        - "4369:4369"
+        - "5671:5671"
+        - "5672:5672"
+        - "25672:25672"
+        - "15671:15671"
+        - "15672:15672"
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:15672"]
+            interval: 30s
+            timeout: 10s
+            retries: 5
+
+    mongodb:
+        image: mongo
+        ports:
+            - "27017:27017"
+
+    server:
+        image: sphere
+        build: .
+        ports:
+        - "8000:8000"
+        environment:
+        - HOSTNAMERABBIT=rabbitmq
+        restart: on-failure
+        volumes:
+            - shared_vloume:/tmp
+        depends_on:
+            - rabbitmq
+        links: 
+            - rabbitmq
+        command: python3.8 -m sphere.server run-server 'rabbitmq://rabbitmq:5672'
+
+    pose_parser:
+        image: sphere
+        environment:
+        - HOSTNAMERABBIT=rabbitmq
+        restart: on-failure
+        volumes:
+            - shared_vloume:/tmp
+        depends_on:
+            - rabbitmq
+        links: 
+            - rabbitmq
+        command: python3.8 -m sphere.parsers run-parser 'pose' 'rabbitmq://rabbitmq:5672'
+
+    feelings_parser:
+        image: sphere
+        environment:
+        - HOSTNAMERABBIT=rabbitmq
+        restart: on-failure
+        volumes:
+            - shared_vloume:/tmp
+        depends_on:
+            - rabbitmq
+        links: 
+            - rabbitmq
+        command: python3.8 -m sphere.parsers run-parser 'feelings' 'rabbitmq://rabbitmq:5672'
+
+    color_image_parser:
+        image: sphere
+        environment:
+        - HOSTNAMERABBIT=rabbitmq
+        restart: on-failure
+        volumes:
+            - shared_vloume:/tmp
+        depends_on:
+            - rabbitmq
+        links: 
+            - rabbitmq
+        command: python3.8 -m sphere.parsers run-parser 'color-image' 'rabbitmq://rabbitmq:5672'
+
+    depth_image_parser:
+        image: sphere
+        environment:
+        - HOSTNAMERABBIT=rabbitmq
+        restart: on-failure
+        volumes:
+            - shared_vloume:/tmp
+        depends_on:
+            - rabbitmq
+        links: 
+            - rabbitmq
+        command: python3.8 -m sphere.parsers run-parser 'depth-image' 'rabbitmq://rabbitmq:5672'
+
+    saver:
+        image: sphere
+        environment:
+        - HOSTNAMERABBIT=rabbitmq
+        restart: on-failure
+        volumes:
+            - shared_vloume:/tmp
+        depends_on:
+            - rabbitmq
+            - mongodb
+        links: 
+            - rabbitmq
+        command: python3.8 -m sphere.saver run-saver 'mongodb://mongodb:27017' 'rabbitmq://rabbitmq:5672'
+
+    api:
+        image: sphere
+        ports:
+        - "5000:5000"
+        environment:
+        - HOSTNAMERABBIT=rabbitmq
+        restart: on-failure
+        volumes:
+            - shared_vloume:/tmp
+        depends_on:
+            - mongodb
+        links: 
+            - rabbitmq
+        command: python3.8 -m sphere.api run-server -d 'mongodb://mongodb:27017'
+
+    gui:
+        image: sphere
+        ports:
+        - "8080:8080"
+        environment:
+        - HOSTNAMERABBIT=rabbitmq
+        restart: on-failure
+        volumes:
+            - shared_vloume:/tmp
+        depends_on:
+            - mongodb
+        links: 
+            - rabbitmq
+        command: python3.8 -m sphere.gui run-server -d 'mongodb://mongodb:27017' 
+
+volumes:
+    shared_vloume:
