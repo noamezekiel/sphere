@@ -8,6 +8,9 @@ class User():
         self.birthday = birthday
         self.gender = gender
 
+    def __repr__(self):
+        return f'User(user_id={self.user_id})'
+
     def serialize(self):
         d = self.__dict__.copy()
         return json.dumps(d)

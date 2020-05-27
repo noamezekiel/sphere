@@ -15,6 +15,9 @@ class Driver():
             self.user.ParseFromString(f.read(size))
             self._cur = f.tell()
 
+    def __repr__(self, path):
+        return f'protobuf Driver(path={self.path})'
+
     def get_user(self):
         user_dict = MessageToDict(
             self.user,

@@ -13,6 +13,9 @@ class Snapshot():
         self.depth_image = depth_image
         self.feelings = feelings
 
+    def __repr__(self):
+        return f'Snapshot(datetime={self.datetime})'
+
     def serialize(self, fields):
         d = self.__dict__.copy()
         for field in d:

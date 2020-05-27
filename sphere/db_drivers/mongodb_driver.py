@@ -8,6 +8,9 @@ class Driver():
         self._db = client['db']
         self._users = self._db['users']
 
+    def __repr__(self):
+        return f'mongodb Driver(host={self.host}, port={self.port})'
+
     def save(self, topic, data):
         if topic == 'users':
             data['birthday'] = dt.datetime.fromtimestamp(data['birthday'])

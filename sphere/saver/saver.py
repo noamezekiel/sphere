@@ -8,6 +8,9 @@ class Saver():
         db, db_host, db_port = f.scheme, f.host, f.port
         self._driver = db_drivers[db].Driver(db_host, db_port)
 
+    def __repr__(self):
+    	return f'Saver(db_url={self.db_url})'
+
     def save(self, topic, raw_data):
         data = json.loads(raw_data)
         self._driver.save(topic, data)

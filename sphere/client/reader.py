@@ -7,6 +7,9 @@ class Reader():
         self.driver = client_drivers[file_format].Driver(path)
         self.user = self.driver.get_user()
 
+    def __repr__(self):
+    	return f'Reader(path={self.path}, file_format={self.file_format})'
+
     def __iter__(self):
         for snapshot in self.driver.snapshots():
             yield snapshot
