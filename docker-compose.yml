@@ -3,7 +3,7 @@ version: "3"
 services:
 
     rabbitmq:
-        image: rabbitmq:management
+        image: rabbitmq
         ports:
         - "4369:4369"
         - "5671:5671"
@@ -40,6 +40,7 @@ services:
 
     pose_parser:
         image: sphere
+        build: .
         environment:
         - HOSTNAMERABBIT=rabbitmq
         restart: on-failure
@@ -53,6 +54,7 @@ services:
 
     feelings_parser:
         image: sphere
+        build: .
         environment:
         - HOSTNAMERABBIT=rabbitmq
         restart: on-failure
@@ -66,6 +68,7 @@ services:
 
     color_image_parser:
         image: sphere
+        build: .
         environment:
         - HOSTNAMERABBIT=rabbitmq
         restart: on-failure
@@ -79,6 +82,7 @@ services:
 
     depth_image_parser:
         image: sphere
+        build: .
         environment:
         - HOSTNAMERABBIT=rabbitmq
         restart: on-failure
@@ -92,6 +96,7 @@ services:
 
     saver:
         image: sphere
+        build: .
         environment:
         - HOSTNAMERABBIT=rabbitmq
         restart: on-failure
@@ -106,6 +111,7 @@ services:
 
     api:
         image: sphere
+        build: .
         ports:
         - "5000:5000"
         environment:
@@ -121,6 +127,7 @@ services:
 
     gui:
         image: sphere
+        build: .
         ports:
         - "8080:8080"
         environment:
