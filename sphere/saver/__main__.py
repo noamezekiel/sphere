@@ -1,3 +1,4 @@
+import traceback
 import click
 from furl import furl
 from . import Saver
@@ -14,26 +15,36 @@ def main():
 @click.argument('topic', type=str)
 @click.argument('path', type=str)
 def sphere_save(database, topic, path):
-    saver = Saver(database)
-    with open(path, 'rb') as f:
-        raw_data = f.read()
-    saver.save(topic, raw_data)
+    try:
+        saver = Saver(database)
+        with open(path, 'rb') as f:
+            raw_data = f.read()
+        saver.save(topic, raw_data)
+    except Exception as e:
+        print(f'error in save {topic} {path}: {e}')
+        traceback.print_exc()
+        return 1
 
 @main.command('run-saver')
 @click.argument('db_url', default='mongodb://0.0.0.0:27017/', type=str)
 @click.argument('mq_url', default='rabbitmq://0.0.0.0:5672/', type=str)
 def sphere_run_saver(db_url, mq_url):
-    saver = Saver(db_url)
-    f = furl(mq_url)
-    mq, mq_host, mq_port = f.scheme, f.host, f.port
-    mq_driver = mq_drivers[mq]
-    mq_driver.consume(
-        host=mq_host,
-        port=mq_port,
-        on_message=saver.save,
-        sector='results',
-        topics=list(parsers.keys()) + ['users'],
-        sector_type='direct')
+    try:
+        saver = Saver(db_url)
+        f = furl(mq_url)
+        mq, mq_host, mq_port = f.scheme, f.host, f.port
+        mq_driver = mq_drivers[mq]
+        mq_driver.consume(
+            host=mq_host,
+            port=mq_port,
+            on_message=saver.save,
+            sector='results',
+            topics=list(parsers.keys()) + ['users'],
+            sector_type='direct')
+    except Exception as e:
+        print(f'error in run-saver: {e}')
+        traceback.print_exc()
+        return 1
 
     
 if __name__ == '__main__':
