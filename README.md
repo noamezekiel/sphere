@@ -61,7 +61,7 @@ And with the command-line interface:
 $ python -m sphere.server run-server \
       -h/--host '127.0.0.1'          \
       -p/--port 8000                 \
-      'rabbitmq://127.0.0.1:5672/' # format of the url: <mq_server>://<host>:<port>/
+      'rabbitmq://127.0.0.1:5672/' # format of the url: <db_server>://<host>:<port>/
 ... # listen on host:port and pass received messages to message queue
 ```
 Please note that in python you can pass any publishing function, but in the cli you can only pass a URL to a message queue.
@@ -90,7 +90,7 @@ For running the parser as a service-
 $ python -m sphere.parsers run-parser 'pose' 'rabbitmq://127.0.0.1:5672/'
 ```
 Which accepts a parser name and a url.
-The format of the url is: *<mq_server>://<host>:<port>/*
+The format of the url is: *mq_server://host:port/*
 
 ### saver
 The saver consumes from the message queue and saves the data to the database
@@ -103,7 +103,7 @@ It is available as **sphere.saver** and expose the following API:
 >>> saver.save('pose', data)
 ```
 Which connects to a database, accepts a topic name and some data, as consumed from the message queue, and saves it to the database.
-The format of the url is: *<db_server>://<host>:<port>/*
+The format of the url is: *db_server://host:port/*
 
 And with the command-line interface:
 ```sh
@@ -181,3 +181,18 @@ It is available as **sphere.gui** and expose the following API:
 ...     database_url = 'mongodb://127.0.0.1:27017/', # <db_server>://<host>:<port>/
 ... )
 ```
+And with the command-line interface:
+```sh
+$ python -m cortex.gui run-server \
+      -h/--host '127.0.0.1'       \
+      -p/--port 8080              \
+      -d/--database 'mongodb://127.0.0.1:27017'
+```
+
+## Deployment
+For running the server, message queue, parsers, saver, database, api and gui in docker containers, run the **run-pipeline.sh** script:
+```sh
+$ ./scripts/run-pipeline.sh
+... Setting up the pipeline, this may take a few seconds
+... 
+$ # now upload samples and consume the api and gui
