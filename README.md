@@ -124,3 +124,30 @@ $ python -m sphere.saver run-saver  \
 Which consumes the data from the message queue and saves it to the database.
 The format of the urls is the same as before.
 
+### api
+The api serves a RESTfull API.
+It is available as **sphere.api** and expose the following API:
+```pycon
+>>> from sphere.api import run_api_server
+>>> run_api_server(
+...     host = '127.0.0.1',
+...     port = 5000,
+...     database_url = 'mongodb://127.0.0.1:27017',
+... )
+# listen on host:port and serve data from database_url
+```
+And with the command-line interface:
+```sh
+$ python -m sphere.api run-server \
+      -h/--host '127.0.0.1'       \
+      -p/--port 5000              \
+      -d/--database 'mongodb://127.0.0.1:27017'
+```
+The format of the urls is the same as above.
+The api server support the following RESTful API endpoints:
+- GET /users: Returns the list of all the supported users.
+- GET /users/user-id: Returns the specified user's details.
+- GET /users/user-id/snapshots: Returns the list of the specified user's snapshot.
+- GET /users/user-id/snapshots/snapshot-id: Returns the specified snapshot's details.
+- GET /users/user-id/snapshots/snapshot-id/result-name: Returns the specified snapshot's result.
+- GET /users/user-id/snapshots/snapshot-id/color-image/data: Data of large binary result.
