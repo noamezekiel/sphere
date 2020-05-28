@@ -145,9 +145,28 @@ $ python -m sphere.api run-server \
 ```
 The format of the urls is the same as above.
 The api server support the following RESTful API endpoints:
-- GET /users: Returns the list of all the supported users.
-- GET /users/user-id: Returns the specified user's details.
-- GET /users/user-id/snapshots: Returns the list of the specified user's snapshot.
-- GET /users/user-id/snapshots/snapshot-id: Returns the specified snapshot's details.
-- GET /users/user-id/snapshots/snapshot-id/result-name: Returns the specified snapshot's result.
-- GET /users/user-id/snapshots/snapshot-id/color-image/data: Data of large binary result.
+- **GET /users**: Returns the list of all the supported users.
+- **GET /users/user-id**: Returns the specified user's details.
+- **GET /users/user-id/snapshots**: Returns the list of the specified user's snapshot.
+- **GET /users/user-id/snapshots/snapshot-id**: Returns the specified snapshot's details.
+- **GET /users/user-id/snapshots/snapshot-id/result-name**: Returns the specified snapshot's result.
+- **GET /users/user-id/snapshots/snapshot-id/color-image/data**: Data of large binary result.
+
+### cli
+The cli consume the api, and reflect it.
+It is available as **sphere.cli** and expose the following cli:
+```sh
+$ python -m sphere.cli get-users
+... # Returns the list of all the supported users
+$ python -m sphere.cli get-user 1
+... # Returns the details of user 1
+$ python -m sphere.cli get-snapshots 1
+... # Returns the list of snapshots of user 1
+$ python -m sphere.cli get-snapshot 1 2
+... # Returns details of snapshot 2 of user 1
+$ python -m sphere.cli get-result 1 2 'pose'
+... # Returns the result of snapshot 2 of user 1
+```
+All commands accept the *-h/--host* and *-p/--port* flags to configure the host and port, but default to the api's address.
+The get-result command also accept the *-s/--save* flag that, if specified, receives a path, and saves the result's data to that path.
+
