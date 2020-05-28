@@ -61,7 +61,7 @@ And with the command-line interface:
 $ python -m sphere.server run-server \
       -h/--host '127.0.0.1'          \
       -p/--port 8000                 \
-      'rabbitmq://127.0.0.1:5672/' # format of the url: mq_server://host:port/
+      'rabbitmq://127.0.0.1:5672/' # format of the url: <mq_server>://<host>:<port>/
 ... # listen on host:port and pass received messages to message queue
 ```
 Please note that in python you can pass any publishing function, but in the cli you can only pass a URL to a message queue.
@@ -90,7 +90,7 @@ For running the parser as a service-
 $ python -m sphere.parsers run-parser 'pose' 'rabbitmq://127.0.0.1:5672/'
 ```
 Which accepts a parser name and a url.
-The format of the url is: *mq_server://host:port/*
+The format of the url is: *<mq_server>://<host>:<port>/*
 
 ### saver
 The saver consumes from the message queue and saves the data to the database
@@ -103,7 +103,7 @@ It is available as **sphere.saver** and expose the following API:
 >>> saver.save('pose', data)
 ```
 Which connects to a database, accepts a topic name and some data, as consumed from the message queue, and saves it to the database.
-The format of the url is: *db_server://host:port/*
+The format of the url is: *<db_server>://<host>:<port>/*
 
 And with the command-line interface:
 ```sh
@@ -170,3 +170,14 @@ $ python -m sphere.cli get-result 1 2 'pose'
 All commands accept the *-h/--host* and *-p/--port* flags to configure the host and port, but default to the api's address.
 The get-result command also accept the *-s/--save* flag that, if specified, receives a path, and saves the result's data to that path.
 
+### gui
+The gui run a web server that reflects the data from the database.
+It is available as **sphere.gui** and expose the following API:
+```pycon
+>>> from sphere.gui import run_server
+>>> run_server(
+...     host = '127.0.0.1',
+...     port = 8080,
+...     database_url = 'mongodb://127.0.0.1:27017/', # <db_server>://<host>:<port>/
+... )
+```
