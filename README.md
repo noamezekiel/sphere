@@ -64,7 +64,35 @@ With the command-line interface:
 $ python -m cortex.server run-server \
       -h/--host '127.0.0.1'          \
       -p/--port 8000                 \
-      'rabbitmq://127.0.0.1:5672/' # format of th url: mq_server://host:port/
+      'rabbitmq://127.0.0.1:5672/' # format of the url: mq_server://host:port/
 ... # listen on host:port and pass received messages to message queue
 ```
 Please note that in python you can pass any publishing function, but in the cli you can only pass a URL to a message queue.
+
+### parsers
+The parsers consume raw data of a snapshot and return the parsed data.
+
+It is available as **sphere.server** and expose the following API:
+
+For running the parser on a specific data-
+With python:
+```pycon
+>>> from cortex.parsers import run_parser
+>>> data = … 
+>>> result = run_parser('pose', data)
+```
+Which accepts a parser name and some raw data.
+
+With the command-line interface:
+```sh
+$ python -m cortex.parsers parse 'pose' 'snapshot.raw' > 'pose.result'
+```
+Which accepts a parser name and a path to some raw data.
+
+For running the parser as a service-
+```sh
+$ python -m cortex.parsers run-parser 'pose' 'rabbitmq://127.0.0.1:5672/'
+```
+Which accepts a parser name and a url.
+The format of the url is: mq_server://host:port/
+
