@@ -29,14 +29,12 @@ Our library consists the followings parts: client, server, parsers, saver, api, 
 The client read the sample and upload it to the server.
 It is available as **sphere.client** and expose the following API:
 
-
-With python:
 ```pycon
 >>> from sphere.client import upload_sample
 >>> upload_sample(host='127.0.0.1', port=8000, path='sample.mind.gz')
 ... # upload path to the server at host:port
 ```
-With the command-line interface:
+And With the command-line interface:
 ```sh
 $ python -m sphere.client upload_sample  \
       -h/--host '127.0.0.1'             \
@@ -51,17 +49,16 @@ The server accept connections from clients receive the uploaded samples and publ
 
 It is available as **sphere.server** and expose the following API:
 
-With python:
 ```pycon
->>> from cortex.server import run_server
+>>> from sphere.server import run_server
 >>> def print_message(message):
 ...     print(message)
 >>> run_server(host='127.0.0.1', port=8000, publish=print_message)
 ... # listen on host:port and pass received messages to publish
 ```
-With the command-line interface:
+And with the command-line interface:
 ```sh
-$ python -m cortex.server run-server \
+$ python -m sphere.server run-server \
       -h/--host '127.0.0.1'          \
       -p/--port 8000                 \
       'rabbitmq://127.0.0.1:5672/' # format of the url: mq_server://host:port/
@@ -72,12 +69,11 @@ Please note that in python you can pass any publishing function, but in the cli 
 ### parsers
 The parsers consume raw data of a snapshot and return the parsed data.
 
-It is available as **sphere.server** and expose the following API:
+It is available as **sphere.parsers** and expose the following API:
 
 For running the parser on a specific data-
-With python:
 ```pycon
->>> from cortex.parsers import run_parser
+>>> from sphere.parsers import run_parser
 >>> data = … 
 >>> result = run_parser('pose', data)
 ```
@@ -85,14 +81,46 @@ Which accepts a parser name and some raw data.
 
 With the command-line interface:
 ```sh
-$ python -m cortex.parsers parse 'pose' 'snapshot.raw' > 'pose.result'
+$ python -m sphere.parsers parse 'pose' 'snapshot.raw' > 'pose.result'
 ```
 Which accepts a parser name and a path to some raw data.
 
 For running the parser as a service-
 ```sh
-$ python -m cortex.parsers run-parser 'pose' 'rabbitmq://127.0.0.1:5672/'
+$ python -m sphere.parsers run-parser 'pose' 'rabbitmq://127.0.0.1:5672/'
 ```
 Which accepts a parser name and a url.
-The format of the url is: mq_server://host:port/
+The format of the url is: *mq_server://host:port/*
+
+### saver
+The saver consumes from the message queue and saves the data to the database
+
+It is available as **sphere.saver** and expose the following API:
+```pycon
+>>> from sphere.saver import Saver
+>>> saver = Saver(database_url)
+>>> data = …
+>>> saver.save('pose', data)
+```
+Which connects to a database, accepts a topic name and some data, as consumed from the message queue, and saves it to the database.
+The format of the url is: *db_server://host:port/*
+
+And with the command-line interface:
+```sh
+python -m sphere.saver save                     \
+      -d/--database 'mongodb://127.0.0.1:27017' \
+     'pose'                                       \
+     'pose.result' 
+```
+Which accepts a topic name and a path to some raw data, as consumed from the message queue, and saves it to a database.
+The format of the url is the same as above.
+
+For running the saver as a server:
+```sh
+$ python -m sphere.saver run-saver  \
+      'mongodb://127.0.0.1:27017' \
+      'rabbitmq://127.0.0.1:5672/'
+```
+Which consumes the data from the message queue and saves it to the database.
+The format of the urls is the same as before.
 
