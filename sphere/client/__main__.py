@@ -11,7 +11,7 @@ def main():
 @click.option('-h', '--host', default='0.0.0.0', type=str)
 @click.option('-p', '--port', default=8000, type=int)
 @click.argument('path', type=str)
-@click.argument('-f', '--file-format', default='protobuf', type=str)
+@click.option('-f', '--file-format', default='protobuf', type=str)
 def sphere_upload_sample(host, port, path, file_format):
     try:
     	upload_sample(path, host, port, file_format)
