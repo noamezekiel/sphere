@@ -3,6 +3,7 @@ import time
 import threading
 import pytest
 from sphere.client import upload_sample
+from sphere.parsers import fields
 from sphere.protocol import User, Snapshot
 from sphere.client.reader import Reader
 
@@ -28,7 +29,6 @@ app.snapshots = 0
 
 @app.route('/config', methods=['GET'])
 def config():
-    fields = ['pose', 'color_image', 'depth_image', 'feelings']
     return flask.jsonify(fields=fields), 200
 
 @app.route('/snapshot', methods=['POST'])
