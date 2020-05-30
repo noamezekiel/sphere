@@ -8,7 +8,7 @@ from sphere.protocol import User, Snapshot
 from sphere.client.reader import Reader
 
 _USER = User(
-        user_id='73',
+        user_id=73,
         username='Noam Ezekiel',
         birthday=123,
         gender='m')
@@ -17,7 +17,7 @@ _SNAPSHOTS = [Snapshot(
                 datetime=123,
                 translation=[1, 2, 3],
                 rotation=[1, 2, 3, 4],
-                color_image=[1, 1, b'1'],
+                color_image=[1, 1, b'0'*3],
                 depth_image=[1, 1, 1],
                 feelings=[1, 1, 1, 1])]
 
