@@ -31,7 +31,7 @@ It is available as **sphere.client** and expose the following API:
 
 ```pycon
 >>> from sphere.client import upload_sample
->>> upload_sample(host='127.0.0.1', port=8000, path='sample.mind.gz', file_format='protobuf')
+>>> upload_sample(path='sample.mind.gz', host='127.0.0.1', port=8000, file_format='protobuf')
 ... # upload path to the server at host:port
 ```
 And With the command-line interface:
