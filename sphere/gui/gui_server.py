@@ -38,7 +38,16 @@ def download_file(path):
             mimetype='image/jpg')
 
 
-def run_server(host='0.0.0.0', port='8080', database_url='mongodb://0.0.0.0:27017/'):
+def run_server(host='0.0.0.0', port=8080, database_url='mongodb://0.0.0.0:27017/'):
+    """ Runs the GUI server on host:port that connects to the database.
+    :param host: The GUI's host address, defaults to '0.0.0.0'
+    :type host: str, optional
+    :param port: The GUI's port number, defaults to 8080
+    :type port: int, optional
+    :param database_url: The database URL, in the format: `db_name://host:port/`.
+                            Defaults to 'mongodb://0.0.0.0:27017/'
+    :type database_url: str
+    """
     f = furl(database_url)
     db, db_host, db_port = f.scheme, f.host, f.port 
     app._db_driver = db_drivers[db].Driver(db_host, db_port)

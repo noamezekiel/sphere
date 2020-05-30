@@ -4,6 +4,16 @@ from .reader import Reader
 
 
 def upload_sample(path, host='0.0.0.0', port=8000, file_format='protobuf'):
+    """ Uploading a sample to the server.
+    :param path: The path to the sample
+    :type path: str
+    :param host: The server host address, defaults to '0.0.0.0'
+    :type host: str
+    :param port: The server port number, defaults to 8000
+    :type port: 8000
+    :param file_format: The format of the file, defaults to 'protobuf'
+    :type file_format: str
+    """
     logging.basicConfig(level=logging.INFO)
     reader = Reader(path, file_format)
     user = reader.user

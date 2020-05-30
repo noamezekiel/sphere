@@ -7,7 +7,13 @@ from . import sphere_pb2  # the protocol between the sample to the client
 
 
 class Driver():
+    """ The protobuf Driver for Reader.
+    :param path: The path to the sample
+    :type path: str
+    """ 
     def __init__(self, path):
+        """Constructor method.
+        """
         self.path = path
         self.user = sphere_pb2.User()
         with gzip.open(path, 'rb') as f:
@@ -19,6 +25,10 @@ class Driver():
         return f'protobuf Driver(path={self.path})'
 
     def get_user(self):
+        """ Returns the user of the sample.
+        :return: The user of the sample
+        :rtype: :class:`sphere.protocol.User` object
+        """
         user_dict = MessageToDict(
             self.user,
             use_integers_for_enums=True,
@@ -37,6 +47,8 @@ class Driver():
         return User(**user_dict)
 
     def snapshots(self):
+        """ An iterator that iterates over the snapshots.
+        """
         pb_snapshot = sphere_pb2.Snapshot()
         with gzip.open(self.path, 'rb') as f:
             f.seek(self._cur)
@@ -50,6 +62,12 @@ class Driver():
 
 
 def pb_to_snapshot(pb_snapshot):
+    """ Converts a Snapshot from protobuf object to protocol object.
+    :param pb_snaphot: The protobuf snapshot.
+    :type pb_snapshot: :class:`sphere_pb2.Snapshot` object
+    :return: The snapshot
+    :rtype: :class:`sphere.protocol.Snapshot` object
+    """
     snapshot_dict = MessageToDict(
             pb_snapshot,
             preserving_proto_field_name=True,

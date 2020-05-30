@@ -38,6 +38,16 @@ def snapshot():
 
 
 def run_server(host='0.0.0.0', port=8000, publish=print):
+    """ Run the Server on host:port and publish it.
+    Note: publish input is of the form (user, snapshot)
+
+    :param host: The server host address, defaults to '0.0.0.0'
+    :type host: str, optional
+    :param port: The server port number, defaults to 800-
+    :type port: int, optional
+    :param publish: The publishing function, defaults to print
+    :type publish: function, optional
+    """
     logging.getLogger('werkzeug').setLevel(logging.ERROR)
     app._publish = publish
     logging.basicConfig(level=logging.INFO)
