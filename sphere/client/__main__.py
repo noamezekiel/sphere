@@ -10,11 +10,11 @@ def main():
 @main.command('upload-sample')
 @click.option('-h', '--host', default='0.0.0.0', type=str)
 @click.option('-p', '--port', default=8000, type=int)
-@click.argument('path', default='etc/sample.mind.gz')
-@click.argument('file_format', default='protobuf')
+@click.argument('path', type=str)
+@click.argument('-f', '--file-format', default='protobuf', type=str)
 def sphere_upload_sample(host, port, path, file_format):
     try:
-    	upload_sample(host, port, path, file_format)
+    	upload_sample(path, host, port, file_format)
     except Exception as e:
         print(f'error in upload_sample: {e}')
         traceback.print_exc()

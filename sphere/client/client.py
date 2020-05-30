@@ -3,7 +3,7 @@ import requests
 from .reader import Reader
 
 
-def upload_sample(host='0.0.0.0', port=8000, path='etc/sample.mind.gz', file_format='protobuf'):
+def upload_sample(path, host='0.0.0.0', port=8000, file_format='protobuf'):
     logging.basicConfig(level=logging.INFO)
     reader = Reader(path, file_format)
     user = reader.user
