@@ -2,7 +2,7 @@
 ![codecov](https://codecov.io/gh/noamezekiel/sphere/branch/master/graph/badge.svg)
 # Sphere
 Sphere is a Python library that implements a Brain Command Interface system.
-
+[Full documentation](https://spheredocs.readthedocs.io/en/latest/)
 ## Installation
 1. Clone the repository and enter it:
 
