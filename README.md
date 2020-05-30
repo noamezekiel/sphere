@@ -31,7 +31,7 @@ It is available as **sphere.client** and expose the following API:
 
 ```pycon
 >>> from sphere.client import upload_sample
->>> upload_sample(host='127.0.0.1', port=8000, path='sample.mind.gz')
+>>> upload_sample(host='127.0.0.1', port=8000, path='sample.mind.gz', file_format='protobuf')
 ... # upload path to the server at host:port
 ```
 And With the command-line interface:
@@ -39,10 +39,10 @@ And With the command-line interface:
 $ python -m sphere.client upload_sample  \
       -h/--host '127.0.0.1'             \
       -p/--port 8000                    \
+      -f/--file-format 'protobuf'
       'sample.mind.gz'
 ... # upload 'snapshot.mind.gz' to the server at host:port
 ```
-**upload_sample** also take an optional parameter *file_format* for future samples formats.
 
 ### server
 The server accept connections from clients receive the uploaded samples and publish them to its message queue.
