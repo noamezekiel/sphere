@@ -3,14 +3,17 @@ import datetime as dt
 
 
 class Driver():
-    """ The mongodb Driver.
+    """
+    The mongodb Driver.
+    
     :param host: The mongodb host address
     :type host: str
     :param port: The mongodb port number
     :type port: int
     """ 
     def __init__(self, host, port):
-        """ Constructor method
+        """
+        Constructor method
         """
         client = MongoClient(host, port)
         self._db = client['db']
@@ -20,7 +23,9 @@ class Driver():
         return f'mongodb Driver(host={self.host}, port={self.port})'
 
     def save(self, topic, data):
-        """ Saves data of that topic.
+        """
+        Saves data of that topic.
+        
         :param topic: The topic of the data
         :type topic: str
         :param data: The data
@@ -42,7 +47,9 @@ class Driver():
                 upsert=True)
 
     def get_users(self, user_id=None):
-        """ Returns a list of all supported users. If user_id is mentioned, returns the specified user's details
+        """
+        Returns a list of all supported users. If user_id is mentioned, returns the specified user's details
+        
         :param user_id: The id of the requested user, defaults to None
         :type user_id: int, optional
         :return: List of dictionaries that describes the user, or a single dictionary.
@@ -53,7 +60,9 @@ class Driver():
         return list(self._users.find({}, {'_id': False}))
 
     def get_snapshots(self, user_id, snapshot_id=None):
-        """ Returns the list of the specified user's snapshot. If snapshot_id is mentioned, returns the specified snapshot's.
+        """
+        Returns the list of the specified user's snapshot. If snapshot_id is mentioned, returns the specified snapshot's.
+        
         :param user_id: The id of the requested user
         :type user_id: int
         :param snapshot_id: The id of the requested snapshot

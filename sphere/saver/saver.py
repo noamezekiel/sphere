@@ -3,12 +3,15 @@ import json
 from .. import db_drivers
 
 class Saver():
-    """ Saver that saves data to the database
+    """
+    Saver that saves data to the database
+    
     :param db_url: The database URL, in the format: `db_name://host:port/`.
     :type db_url: str
     """
     def __init__(self, db_url):
-        """ Constructor method.
+        """
+        Constructor method.
         """
         f = furl(db_url)
         db, db_host, db_port = f.scheme, f.host, f.port
@@ -18,7 +21,9 @@ class Saver():
     	return f'Saver(db_url={self.db_url})'
 
     def save(self, topic, raw_data):
-        """ Saves the raw data of the specified topic to the database.
+        """
+        Saves the raw data of the specified topic to the database.
+        
         :param topic: The topic of the data
         :type topic: str
         :param raw_data: The raw data to be saved

@@ -12,8 +12,7 @@ class Driver():
     :type path: str
     """ 
     def __init__(self, path):
-        """Constructor method.
-        """
+        """Constructor method."""
         self.path = path
         self.user = sphere_pb2.User()
         with gzip.open(path, 'rb') as f:
@@ -47,8 +46,7 @@ class Driver():
         return User(**user_dict)
 
     def snapshots(self):
-        """ An iterator that iterates over the snapshots.
-        """
+        """ An iterator that iterates over the snapshots."""
         pb_snapshot = sphere_pb2.Snapshot()
         with gzip.open(self.path, 'rb') as f:
             f.seek(self._cur)

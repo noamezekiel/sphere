@@ -2,7 +2,9 @@ from . import client_drivers
 
 
 class Reader():
-    """ Reader of a file.
+    """
+    Reader of a file.
+    
     :param path: The path to the file
     :type path: str
     :param file_format: The format of the file

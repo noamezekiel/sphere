@@ -4,7 +4,9 @@ from .reader import Reader
 
 
 def upload_sample(path, host='0.0.0.0', port=8000, file_format='protobuf'):
-    """ Uploading a sample to the server.
+    """
+    Uploading a sample to the server.
+    
     :param path: The path to the sample
     :type path: str
     :param host: The server host address, defaults to '0.0.0.0'

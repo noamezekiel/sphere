@@ -6,7 +6,9 @@ app = flask.Flask('api-server')
 
 @app.route('/users', methods=['GET'])
 def get_users():
-    """ Returns the list of all the supported users, including their IDs and names only. In json format
+    """
+    Returns the list of all the supported users, including their IDs and names only. In json format.
+    
     :return: a list of dictionaries with the keys: 'user_id', 'username'
     :rtype: json
     """
@@ -17,7 +19,9 @@ def get_users():
 
 @app.route('/users/<int:user_id>', methods=['GET'])
 def get_user(user_id):
-    """ Returns the specified user's details: ID, name, birthday and gender. In json format
+    """
+    Returns the specified user's details: ID, name, birthday and gender. In json format.
+    
     :param user_id: The id of the requested user
     :type user_id: int
     :return: Dictionary with the keys: 'user_id', 'username', 'birthday', 'gender'
@@ -30,7 +34,9 @@ def get_user(user_id):
 
 @app.route('/users/<int:user_id>/snapshots', methods=['GET'])
 def get_snapshots(user_id):
-    """ Returns the list of the specified user's snapshot IDs and datetimes. In json format.
+    """
+    Returns the list of the specified user's snapshot IDs and datetimes. In json format.
+    
     :param user_id: The id of the requested user
     :type user_id: int
     :return: List of dictionaries with the keys: 'snapshot_id', 'datetime'
@@ -43,7 +49,9 @@ def get_snapshots(user_id):
 
 @app.route('/users/<int:user_id>/snapshots/<int:snapshot_id>', methods=['GET'])
 def get_snapshot(user_id, snapshot_id):
-    """ Returns the specified snapshot's details: ID, datetime, and the available results. In json format.
+    """
+    Returns the specified snapshot's details: ID, datetime, and the available results. In json format.
+    
     :param user_id: The id of the requested user
     :type user_id: int
     :param snapshot_id: The id of the requested snapshot
@@ -68,7 +76,9 @@ def get_snapshot(user_id, snapshot_id):
     '/users/<int:user_id>/snapshots/<int:snapshot_id>/<string:result>',
     methods=['GET'])
 def get_result(user_id, snapshot_id, result):
-    """ Returns the specified snapshot's result. If the result is a large binary data, returns a URL to the data.
+    """
+    Returns the specified snapshot's result. If the result is a large binary data, returns a URL to the data.
+    
     :param user_id: The id of the requested user
     :type user_id: int
     :param snapshot_id: The id of the requested snapshot
@@ -94,7 +104,9 @@ def get_result(user_id, snapshot_id, result):
     '/users/<int:user_id>/snapshots/<int:snapshot_id>/<string:result>/data',
     methods=['GET'])
 def get_result_data(user_id, snapshot_id, result):
-    """ Returns a large binary result in a jpg format
+    """
+    Returns a large binary result in a jpg format
+    
     :param user_id: The id of the requested user
     :type user_id: int
     :param snapshot_id: The id of the requested snapshot
@@ -123,13 +135,14 @@ def get_result_data(user_id, snapshot_id, result):
 
 
 def run_api_server(host='0.0.0.0', port=5000, database_url='mongodb://0.0.0.0:27017/'):
-    """ Runs the API server on host:port
+    """
+    Runs the API server on host, port
+    
     :param host: The API host address, defaults to '0.0.0.0'
     :type host: str
     :param port: The API port number, defaults to 5000
     :type port: int
-    :param database_url: The URL of the database, in the format: ``db_name://host:port/`.
-                            Defaults to 'mongodb://0.0.0.0:27017/'
+    :param database_url: The URL of the database, in the format: ``db_name://host:port/``. Defaults to `mongodb://0.0.0.0:27017/`
     :type database_url: str
     """
     f = furl(database_url)

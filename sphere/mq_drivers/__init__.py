@@ -1,4 +1,4 @@
-""" How to add a new message queue Driver?
+"""How to add a new message queue Driver?
 To add a new message queue Driver, named mydriver, add a file in this package named mydriver_driver.py
 In that file implement the following methods:
 

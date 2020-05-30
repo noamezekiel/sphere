@@ -2,7 +2,9 @@ import json
 
 
 class User():
-    """ A User object of the protocol.
+    """
+    A User object of the protocol.
+    
     :param user_id: The id of the user
     :type user_id: int
     :param username: The name of the user
@@ -22,7 +24,9 @@ class User():
         return f'User(user_id={self.user_id})'
 
     def serialize(self):
-        """ Returns a serialized user with json.
+        """
+        Returns a serialized user with json.
+        
         :return: A serialized user
         :rtype: json
         """
@@ -30,7 +34,9 @@ class User():
         return json.dumps(d)
 
     def to_publish(self):
-        """ Returns a serialized user with json to publish on the message queue.
+        """
+        Returns a serialized user with json to publish on the message queue.
+        
         :return: A serialized user
         :rtype: json
         """
@@ -39,7 +45,9 @@ class User():
 
     @staticmethod
     def deserialize(data):
-        """ Deserialize a user with json.
+        """
+        Deserialize a user with json.
+        
         :param data: The data to deserialize
         :type data: json
         :return: The user object

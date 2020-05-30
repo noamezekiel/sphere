@@ -4,7 +4,9 @@ import pathlib
 
 
 class Snapshot():
-    """ A Snapshot object of the protocol.
+    """
+    A Snapshot object of the protocol.
+    
     :param datetime: The datetime of the snapshot, in seconds since the Epoch
     :type datetime: int (seconds since the Epoch)
     :param translation: A list of 3 coordinates
@@ -20,7 +22,8 @@ class Snapshot():
     """
     def __init__(self, datetime, translation, rotation, color_image,
                  depth_image, feelings):
-        """ Constructor method
+        """
+        Constructor method
         """
         self.datetime = datetime
         self.translation = translation
@@ -33,7 +36,9 @@ class Snapshot():
         return f'Snapshot(datetime={self.datetime})'
 
     def serialize(self, fields):
-        """ Returns a serialized snapshot with bson.
+        """
+        Returns a serialized snapshot with bson.
+        
         :param fields: Fields to serialize
         :type fields: list
         :return: A serialized snapshot
@@ -46,7 +51,9 @@ class Snapshot():
         return bson.encode(d)
 
     def to_publish(self, path, user_id):
-        """ Returns a serialized snapshot with json to publish on the message queue.
+        """
+        Returns a serialized snapshot with json to publish on the message queue.
+        
         :param path: The path of the raw_data
         :type path: str
         :param user_id: The id of the user
@@ -62,7 +69,9 @@ class Snapshot():
 
     @staticmethod
     def deserialize(data):
-        """ Deserialize a snapshot with bson.
+        """
+        Deserialize a snapshot with bson.
+        
         :param data: The data to deserialize
         :type data: bson
         :return: The snapshot object

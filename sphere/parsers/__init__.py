@@ -1,4 +1,5 @@
-""" How to add a new message queue Driver?
+"""Parsers that parse snapshot raw data.\n
+How to add a new message queue Driver?
 To add a new parser, named myparser, add a file in this package named parse_myparser.py
 In that file implement the following function:
 

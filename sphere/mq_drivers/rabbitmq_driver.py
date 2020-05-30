@@ -4,7 +4,8 @@ import pika
 logging.getLogger('pika').setLevel(logging.ERROR)
 
 def produce(host, port, message, sector, sector_type, topic=None):
-    """ Produces a message to queue, on the specified sector.
+    """
+    Produces a message to queue, on the specified sector.
     If the sector type is `fanout` all subscribers of that sector will receive the message.
     If the sector type is `direct` only subscribers of that specified topic will receive the message.
     
@@ -37,7 +38,8 @@ def produce(host, port, message, sector, sector_type, topic=None):
     connection.close()
 
 def consume(host, port, on_message, sector, sector_type, topics):
-    """ Subscribe to the specifies sector and preform a `on_message` on the messages.
+    """
+    Subscribe to the specifies sector and preform a `on_message` on the messages.
     If the sector type is `fanout` the consumer will receive the message regardless of the topic.
     If the sector type is `direct` the consumer will receive the message only if the topic match.
 

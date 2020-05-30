@@ -1,4 +1,4 @@
-""" How to add a new database Driver?
+"""How to add a new database Driver?
 To add a new databese Driver, named mydriver, add a file in this package named mydriver_driver.py
 In that file implement a class named `Driver` that supply the following methods:
 

@@ -5,7 +5,9 @@ import pathlib
 from utils import DIRECTORY
 
 def parse_depth_image(raw_data):
-    """ Returns a json with a path to the depth image.
+    """
+    Returns a json with a path to the depth image.
+    
     :param raw_data: The raw_data as consumed from the message queue
     :type raw_data: json
     :return: json dumps of a dictionary with the keys: 'user_id', 'datetime', 'depth_image'
