@@ -6,12 +6,12 @@
     <ul>
         <li> user id: {{user['user_id']}} </li>
         <li> gender: {{user['gender']}} </li>
-        <li> birthday: {{user['birthday'].strftime('%a %b %y')}} </li>
+        <li> birthday: {{user['birthday'].strftime('%d %b %y')}} </li>
     </ul>
     <h2> list of snapshots: </h2>
     {% for snapshot in snapshots %}
     <a class="btn btn-primary btn-sm" href="/{{user['user_id']}}/{{snapshot['snapshot_id']}}">
-        {{snapshot['datetime'].strftime('%a %b %y %H:%M:%S:%f')}}
+        {{snapshot['datetime'].strftime('%d %b %y %H:%M:%S:%f')}}
     </a>
     {% endfor %}
     <nav class="navbar navbar-default navbar-fixed-bottom navigation">

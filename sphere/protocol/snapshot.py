@@ -7,8 +7,8 @@ class Snapshot():
     """
     A Snapshot object of the protocol.
     
-    :param datetime: The datetime of the snapshot, in seconds since the Epoch
-    :type datetime: int (seconds since the Epoch)
+    :param datetime: The datetime of the snapshot, in milliseconds since the Epoch
+    :type datetime: int (milliseconds since the Epoch)
     :param translation: A list of 3 coordinates
     :type translation: list
     :param rotation: A list of 4 coordinates
