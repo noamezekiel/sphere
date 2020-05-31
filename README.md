@@ -183,7 +183,7 @@ It is available as **sphere.gui** and expose the following API:
 ```
 And with the command-line interface:
 ```sh
-$ python -m cortex.gui run-server \
+$ python -m sphere.gui run-server \
       -h/--host '127.0.0.1'       \
       -p/--port 8080              \
       -d/--database 'mongodb://127.0.0.1:27017'
