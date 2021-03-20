@@ -22,7 +22,7 @@ furl==2.1.0
 idna==2.9
 imagesize==1.2.0
 itsdangerous==1.1.0
-Jinja2==2.11.1
+Jinja2==2.11.3
 jsonschema==3.2.0
 kiwisolver==1.2.0
 MarkupSafe==1.1.1
