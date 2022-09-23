@@ -35,7 +35,7 @@ paramiko==2.7.1
 pika==1.1.0
 Pillow==7.1.2
 pluggy==0.13.1
-protobuf==3.11.3
+protobuf==3.18.3
 py==1.8.1
 pycparser==2.20
 Pygments==2.6.1
